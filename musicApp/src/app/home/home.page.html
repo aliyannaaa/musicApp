@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>🎵 My Music Library</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="search-bar">
+    <ion-item>
+      <ion-input placeholder="🔍 Search Spotify..."></ion-input>
+      <ion-button expand="block">Search</ion-button>
+    </ion-item>
+  </div>
+
+  <ion-list>
+    <ion-item-divider color="light">
+      <ion-label class="divider-label">🎧 Local Music</ion-label>
+    </ion-item-divider>
+
+    <ion-item class="track-item">
+      <ion-thumbnail slot="start">
+        <img src="assets/local-placeholder.png">
+      </ion-thumbnail>
+      <ion-label>
+        <h3>Local Song Title</h3>
+        <p>Local Artist Name</p>
+      </ion-label>
+      <ion-icon name="play-circle" size="large" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item-divider color="light">
+      <ion-label class="divider-label">🌐 Spotify Music</ion-label>
+    </ion-item-divider>
+
+    <ion-item class="track-item">
+      <ion-thumbnail slot="start">
+        <img src="assets/spotify-placeholder.png">
+      </ion-thumbnail>
+      <ion-label>
+        <h3>Spotify Song Title</h3>
+        <p>Spotify Artist Name</p>
+      </ion-label>
+      <ion-icon name="play-circle" size="large" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
