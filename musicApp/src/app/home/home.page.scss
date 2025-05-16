@@ -4,7 +4,7 @@ ion-header {
     font-size: 1.5em;
   }
   ion-toolbar {
-    color: #4caf50;
+    color: #aaa9bc;
   }
 }
 
@@ -15,12 +15,13 @@ ion-header {
 }
 
 ion-item-divider {
-  background-color: #f0f0f5;
+  background-color: #8a8ab6;
+  border-radius: 8px;
 }
 
 .divider-label {
   font-size: 1.2em;
-  color: #4a4a4a;
+  color: #fcf3f3;
 }
 
 .track-item {
@@ -42,6 +43,6 @@ ion-thumbnail img {
 }
 
 ion-button {
-  --background: #4caf50;
+  --background: #aaa9bc;
   --color: white;
 }
