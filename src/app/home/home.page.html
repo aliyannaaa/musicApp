@@ -30,12 +30,14 @@
         <h3>{{ track.title }}</h3>
         <p>{{ track.artist }}</p>
       </ion-label>
-      <ion-icon 
-        name="play-circle" 
-        size="large" 
-        slot="end" 
-        [color]="track === currentTrack && isPlaying ? 'success' : 'primary'"
-      ></ion-icon>
+
+      <ion-button fill="clear" slot="end" (click)="playLocalTrack(track); $event.stopPropagation()">
+        <ion-icon 
+          [name]="track === currentTrack && isPlaying ? 'pause-circle' : 'play-circle'" 
+          size="large" 
+          [color]="track === currentTrack && isPlaying ? 'success' : 'primary'"
+        ></ion-icon>
+      </ion-button>
     </ion-item>
 
     <ion-item *ngIf="currentTrack">
@@ -64,7 +66,7 @@
 
     <ion-item class="track-item">
       <ion-thumbnail slot="start">
-        <img src="assets/spotify-placeholder.png" />
+        <img src="assets/icon/spotify.png" />
       </ion-thumbnail>
       <ion-label>
         <h3>Spotify Song Title</h3>

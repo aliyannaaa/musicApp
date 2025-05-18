@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { Media } from '@capacitor-community/media';
-import { Capacitor } from '@capacitor/core';
-import { Filesystem, Directory } from '@capacitor/filesystem';
 
 interface LocalTrack {
   title: string;
@@ -23,10 +20,8 @@ export class HomePage {
   currentTrack: LocalTrack | null = null;
   isPlaying: boolean = false;
 
-
   constructor() {}
 
-  // Load local music files when the page is loaded
   async ionViewWillEnter() {
     await this.loadLocalTracks();
   }
@@ -49,32 +44,53 @@ export class HomePage {
   }
 
   async playLocalTrack(track: LocalTrack) {
+    // If clicking on the currently playing track and it's playing, pause it instead
+    if (this.currentTrack === track && this.isPlaying) {
+      this.pauseTrack();
+      return;
+    }
+
+    // If clicking on the currently playing track and it's paused, resume it
+    if (this.currentTrack === track && !this.isPlaying && this.audioPlayer) {
+      this.resumeTrack();
+      return;
+    }
+
+    // Otherwise, play a new track
+
     // Stop any currently playing track
     if (this.audioPlayer) {
       this.audioPlayer.pause();
     }
 
-    // Initialize a new audio instance
     this.audioPlayer = new Audio(track.path);
+    this.currentTrack = track;
+
     this.audioPlayer.play();
+    this.isPlaying = true;
 
     this.audioPlayer.onended = () => {
       console.log(`Finished playing ${track.title}`);
+      this.isPlaying = false;
+      this.currentTrack = null;
     };
 
     this.audioPlayer.onerror = (err) => {
       console.error('Playback error:', err);
+      this.isPlaying = false;
+      this.currentTrack = null;
     };
   }
+
   pauseTrack() {
-    if (this.audioPlayer) {
+    if (this.audioPlayer && this.isPlaying) {
       this.audioPlayer.pause();
       this.isPlaying = false;
     }
   }
 
   resumeTrack() {
-    if (this.audioPlayer) {
+    if (this.audioPlayer && !this.isPlaying) {
       this.audioPlayer.play();
       this.isPlaying = true;
     }
@@ -88,6 +104,7 @@ export class HomePage {
       this.currentTrack = null;
     }
   }
+
   onSearch() {
     if (!this.searchQuery.trim()) {
       alert('Search query is empty!');
